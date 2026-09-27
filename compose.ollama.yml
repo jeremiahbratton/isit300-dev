@@ -1,0 +1,15 @@
+# Week 11 overlay. The baseline compose.yml does not start Ollama.
+# TODO(student): include this file when you are ready:
+#   docker compose -f compose.yml -f compose.ollama.yml up --build
+# TODO(student): pick a small model and document RAM. Do not commit model weights.
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+
+volumes:
+  ollama_data:

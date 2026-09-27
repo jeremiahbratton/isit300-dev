@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - ./data:/workspace/data
+      - node_modules:/workspace/node_modules
+    ports:
+      - "3000:3000"
+    command: npm run dev
+
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      - app
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  node_modules:
+  caddy_data:
+  caddy_config:
